@@ -55,8 +55,13 @@ def organize_files(folder_path):
         for folder, extensions in file_types.items():
             if file_extension in extensions:
                 src_path = os.path.join(folder_path, file)
-                dest_path = os.path.join(folder_path, folder, file)
+                dest_folder_path = os.path.join(folder_path, folder)
+                dest_path = os.path.join(dest_folder_path, file)
                 try:
+                    # Verifica se a pasta de destino já existe
+                    if not os.path.exists(dest_folder_path):
+                        os.makedirs(dest_folder_path)  # Cria a pasta de destino, se não existir
+
                     # Verifica se o arquivo ainda existe antes de tentar movê-lo
                     if os.path.exists(src_path):
                         shutil.move(src_path, dest_path)
