@@ -1,22 +1,23 @@
-import wmi
+import ctypes
 import time
-import random
 
-def change_brightness(brightness):
-    c = wmi.WMI(namespace='wmi')
-    methods = c.WmiMonitorBrightnessMethods()[0]
-    methods.WmiSetBrightness(brightness, 0)
+def change_screen_color(color):
+    SPI_SETDESKWALLPAPER = 20
+    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, color, 0)
 
 def main():
-    print("Alterando temporariamente o brilho da tela do seu monitor...")
-    initial_brightness = 50  # Brilho inicial (entre 0 e 100)
+    print("Alterando temporariamente a cor da tela...")
     try:
-        change_brightness(random.randint(0, 100))  # Altera o brilho para um valor aleatório
-        time.sleep(3)  # Mantém o brilho alterado por 3 segundos
+        # Define uma cor de tela temporária (vermelho)
+        color = "C:\\Users\\danilo.fernando\\Pictures\\Times\\52065dfe-a53a-4614-9206-292871e43765.jpg"
+        change_screen_color(color)
+        time.sleep(3)  # Mantém a cor alterada por 3 segundos
     finally:
-        # Restaura o brilho inicial
-        change_brightness(initial_brightness)
-        print("Brilho da tela restaurado.")
+        # Restaura a cor original da tela
+        # Você precisará definir o caminho para o papel de parede original do seu sistema
+        original_wallpaper = "\\\\192.168.41.254\\netlogon\\wallpaper.jpg"
+        change_screen_color(original_wallpaper)
+        print("Cor da tela restaurada.")
 
 if __name__ == "__main__":
     main()
