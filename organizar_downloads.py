@@ -15,14 +15,14 @@ import tempfile
 
 def organize_files(folder_path):
     """
-        Organiza os arquivos na pasta especificada e realiza outras operações de limpeza.
+    Organiza os arquivos na pasta especificada e realiza outras operações de limpeza.
 
-        Args:
-            folder_path (str): O caminho da pasta que contém os arquivos a serem organizados.
+    Args:
+        folder_path (str): O caminho da pasta que contém os arquivos a serem organizados.
 
-        Returns:
-            None
-        """
+    Returns:
+        None
+    """
 
     # Lista todos os arquivos no diretório especificado
     files = os.listdir(folder_path)
@@ -39,9 +39,9 @@ def organize_files(folder_path):
 
     # Cria as pastas se elas ainda não existirem
     for folder in file_types:
-        folder_path = os.path.join(folder_path, folder)
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
+        folder_path_type = os.path.join(folder_path, folder)
+        if not os.path.exists(folder_path_type):
+            os.makedirs(folder_path_type)
 
     # Move os arquivos para suas respectivas pastas
     for file in files:
@@ -83,7 +83,6 @@ def organize_files(folder_path):
                     print(f"Arquivo temporário removido: {file_path}")
                 except Exception as e:
                     print(f"Falha ao remover arquivo temporário: {file_path} - {e}")
-
 
 # Caminho da pasta "Downloads"
 folder_path = os.path.join(os.path.expanduser('~'), 'Downloads')
