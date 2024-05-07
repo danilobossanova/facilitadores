@@ -33,13 +33,15 @@ def organize_files(folder_path):
         'Documentos': ['.pdf', '.doc', '.docx', '.txt'],
         'Planilhas': ['.xls', '.xlsx', '.csv'],
         'Apresentações': ['.ppt', '.pptx'],
-        'Programas': ['.exe', '.dmg', '.deb','.msi'],
+        'Programas': ['.exe', '.dmg', '.deb','.msi', '.pkg'],
         'Videos': ['.mp4'],
         'Jwpub': ['.jwpub'],
         'Zip': ['.zip','.rar'],
         'Jar': ['.jar','.js','.reg','.pem'],
         'iReport': ['.jrxml','.xml'],
         'Apk': ['.apk'],
+        'ttf': ['.ttf'],
+        'log': ['.log'],
         'Outros': []  # Arquivos que não se encaixam em nenhuma das categorias acima
     }
 
@@ -95,8 +97,15 @@ def organize_files(folder_path):
                 except Exception as e:
                     print(f"Falha ao remover arquivo temporário: {file_path} - {e}")
 
-# Caminho da pasta "Downloads"
-folder_path = os.path.join(os.path.expanduser('~'), 'Downloads')
+# Lista de diretórios para organizar
+folders_to_organize = [
+    "C:\\Users\\danilo.fernando\\Documents",
+    "C:\\Users\\danilo.fernando\\Pictures",
+    "C:\\Users\\danilo.fernando\\OneDrive",
+    "C:\\Users\\danilo.fernando\\Downloads"
+]
 
-# Chama a função para organizar os arquivos na pasta "Downloads"
-organize_files(folder_path)
+# Chama a função para organizar os arquivos em cada diretório
+for folder in folders_to_organize:
+    print(f"\nOrganizando arquivos em: {folder}")
+    organize_files(folder)
