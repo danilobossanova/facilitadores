@@ -1,5 +1,6 @@
 import os
 
+
 def disk_usage_summary(root_folder, num_top_directories=5):
     """
     Analisa o uso do espaço em disco em diferentes diretórios e exibe um resumo dos maiores consumidores de espaço.
@@ -19,8 +20,15 @@ def disk_usage_summary(root_folder, num_top_directories=5):
 
     # Percorre recursivamente o diretório raiz
     for root, dirs, files in os.walk(root_folder):
-        # Calcula o tamanho total dos arquivos no diretório atual
-        total_size = sum(os.path.getsize(os.path.join(root, file)) for file in files)
+        # Tenta calcular o tamanho total dos arquivos no diretório atual
+        total_size = 0
+        for file in files:
+            try:
+                total_size += os.path.getsize(os.path.join(root, file))
+            except FileNotFoundError as e:
+                print(f"Erro ao acessar {os.path.join(root, file)}: {e}")
+                continue
+
         # Armazena o uso do espaço em disco para o diretório atual
         disk_usage[root] = total_size
 
@@ -32,7 +40,8 @@ def disk_usage_summary(root_folder, num_top_directories=5):
     for i, (directory, size) in enumerate(sorted_directories[:num_top_directories], start=1):
         print(f"{i}. {directory} - {size / (1024 * 1024):.2f} MB")
 
-# Diretório raiz a ser analisado (disco C)
+
+# Diretório raiz a ser analisado (C:\Users\danilo.fernando)
 root_folder = "C:\\Users\\danilo.fernando"
 
 # Número de principais diretórios a serem incluídos no resumo
