@@ -1,4 +1,5 @@
 import os
+from tqdm import tqdm
 
 
 def disk_usage_summary(root_folder, num_top_directories=5):
@@ -19,7 +20,7 @@ def disk_usage_summary(root_folder, num_top_directories=5):
     disk_usage = {}
 
     # Percorre recursivamente o diretório raiz
-    for root, dirs, files in os.walk(root_folder):
+    for root, dirs, files in tqdm(os.walk(root_folder), desc="Analisando"):
         # Remove diretórios cujos nomes começam com '.'
         dirs[:] = [d for d in dirs if not d.startswith('.')]
 
@@ -51,7 +52,7 @@ def disk_usage_summary(root_folder, num_top_directories=5):
 root_folder = "C:\\www"
 
 # Número de principais diretórios a serem incluídos no resumo
-num_top_directories = 5
+num_top_directories = 10
 
 # Chama a função para analisar o uso do espaço em disco e exibir o resumo
 disk_usage_summary(root_folder, num_top_directories)
