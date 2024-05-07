@@ -20,6 +20,13 @@ def disk_usage_summary(root_folder, num_top_directories=5):
 
     # Percorre recursivamente o diretório raiz
     for root, dirs, files in os.walk(root_folder):
+        # Ignora diretórios ocultos e que começam com "."
+        dirs[:] = [d for d in dirs if not d.startswith('.') and not os.path.isdir(os.path.join(root, d))]
+
+        # Ignora a pasta AppData
+        if 'AppData' in dirs:
+            dirs.remove('AppData')
+
         # Tenta calcular o tamanho total dos arquivos no diretório atual
         total_size = 0
         for file in files:
