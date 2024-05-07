@@ -29,11 +29,17 @@ def organize_files(folder_path):
 
     # Mapeamento de tipos de arquivos para suas respectivas pastas
     file_types = {
-        'Imagens': ['.jpg', '.jpeg', '.png', '.gif'],
+        'Imagens': ['.jpg', '.jpeg', '.png', '.gif', '.JPG'],
         'Documentos': ['.pdf', '.doc', '.docx', '.txt'],
         'Planilhas': ['.xls', '.xlsx', '.csv'],
         'Apresentações': ['.ppt', '.pptx'],
-        'Programas': ['.exe', '.dmg', '.deb'],
+        'Programas': ['.exe', '.dmg', '.deb','.msi'],
+        'Videos': ['.mp4'],
+        'Jwpub': ['.jwpub'],
+        'Zip': ['.zip','.rar'],
+        'Jar': ['.jar','.js','.reg','.pem'],
+        'iReport': ['.jrxml','.xml'],
+        'Apk': ['.apk'],
         'Outros': []  # Arquivos que não se encaixam em nenhuma das categorias acima
     }
 
