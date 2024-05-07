@@ -44,8 +44,11 @@ def disk_usage_summary(root_folder, num_top_directories=5):
 
     # Exibe o resumo dos maiores consumidores de espaço
     print("\nResumo dos maiores consumidores de espaço:")
-    for i, (directory, size) in enumerate(sorted_directories[:num_top_directories], start=1):
-        print(f"{i}. {directory} - {size / (1024 * 1024):.2f} MB")
+    if sorted_directories:
+        for i, (directory, size) in enumerate(sorted_directories[:num_top_directories], start=1):
+            print(f"{i}. {directory} - {size / (1024 * 1024):.2f} MB")
+    else:
+        print("Nenhum diretório encontrado ou nenhum diretório não-oculto com arquivos.")
 
 
 # Diretório raiz a ser analisado (C:\Users\danilo.fernando)
