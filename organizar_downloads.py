@@ -1,14 +1,3 @@
-"""
-Script para organizar arquivos na pasta Downloads, classificando-os em subpastas por tipo de arquivo,
-listando arquivos grandes e limpando arquivos temporários e lixo eletrônico.
-
-Usage:
-    Execute este script para organizar os arquivos na pasta Downloads.
-    Certifique-se de ter Python instalado e configurado no PATH do sistema.
-
-Author: Danilo Fernando <danilo.bossanova@hotmail.com>
-Date: 07/05/2024
-"""
 import os
 import shutil
 import tempfile
@@ -45,11 +34,13 @@ def organize_files(folder_path):
         'Outros': []  # Arquivos que não se encaixam em nenhuma das categorias acima
     }
 
-    # Cria as pastas se elas ainda não existirem
-    for folder in file_types:
-        folder_path_type = os.path.join(folder_path, folder)
-        if not os.path.exists(folder_path_type):
-            os.makedirs(folder_path_type)
+    # Cria as pastas apenas para os tipos de arquivos que existem na pasta de origem
+    existing_folders = set()
+    for file in files:
+        file_extension = os.path.splitext(file)[1]
+        for folder, extensions in file_types.items():
+            if file_extension in extensions:
+                existing_folders.add(folder)
 
     # Move os arquivos para suas respectivas pastas
     for file in files:
@@ -61,7 +52,7 @@ def organize_files(folder_path):
                 dest_path = os.path.join(dest_folder_path, file)
                 try:
                     # Verifica se a pasta de destino já existe
-                    if not os.path.exists(dest_folder_path):
+                    if folder in existing_folders and not os.path.exists(dest_folder_path):
                         os.makedirs(dest_folder_path)  # Cria a pasta de destino, se não existir
 
                     # Verifica se o arquivo ainda existe antes de tentar movê-lo
